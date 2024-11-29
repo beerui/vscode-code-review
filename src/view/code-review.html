@@ -1,0 +1,29 @@
+<h2>代码评审</h2>
+<div class="info-section">
+  <strong>文件路径:</strong> <span>{{file-path}}</span><br>
+  <strong>文件名:</strong> <span>{{file-name}}</span><br>
+  <strong>编程语言:</strong> <span>{{language-id}}</span><br>
+  <strong>总行数:</strong> <span>{{total-lines}}</span><br>
+</div>
+<div class="info-section">
+  <strong>fileName:</strong> <span>{{start-line}}</span><br>
+  <strong>起始列号:</strong> <span>{{start-column}}</span><br>
+  <strong>结束行号:</strong> <span>{{end-line}}</span><br>
+  <strong>结束列号:</strong> <span>{{end-column}}</span><br>
+  <strong>选中内容行数:</strong> <span>{{selected-lines}}</span><br>
+  <strong>选中内容字符数:</strong> <span>{{selected-chars}}</span><br>
+</div>
+<div class="info-section">
+  <strong>Git用户名:</strong> <span>{{git-user-name}}"</span><br>
+  <strong>Git邮箱:</strong> <span>{{git-user-email}}"</span><br>
+  <strong>当前分支:</strong> <span>{{current-branch}}</span><br>
+</div>
+<h3>选中代码</h3>
+<pre nonce="{{nonce}}">
+  {{selected-code}}
+</pre>
+<textarea id="commentText" rows="5" placeholder="请输入评审意见"></textarea>
+<div>
+  <button id="submitBtn" nonce="{{nonce}}">提交评审</button>
+  <button id="cancelBtn" nonce="{{nonce}}">取消</button>
+</div>

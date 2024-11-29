@@ -1,0 +1,88 @@
+:root {
+	/* VSCode 主题色变量 */
+	--vscode-editor-background: #1E1E1E;
+	--vscode-editor-foreground: #D4D4D4;
+	--vscode-editorLineNumber-foreground: #858585;
+	--vscode-button-background: #0E639C;
+	--vscode-button-hoverBackground: #1177BB;
+	--vscode-inputControl-border: #007FD4;
+	--vscode-input-background: #3C3C3C;
+	--vscode-input-foreground: #CCCCCC;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	background-color: var(--vscode-editor-background);
+	color: var(--vscode-editor-foreground);
+	padding: 15px;
+	line-height: 1.6;
+}
+
+.info-section {
+	background-color: rgba(255, 255, 255, 0.05);
+	border-left: 4px solid var(--vscode-inputControl-border);
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 2px;
+}
+
+.info-section strong {
+	color: var(--vscode-editorLineNumber-foreground);
+	margin-right: 10px;
+	display: inline-block;
+	width: 120px;
+}
+
+.info-section span {
+	color: var(--vscode-editor-foreground);
+}
+
+h2, h3 {
+	color: var(--vscode-editor-foreground);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+	padding-bottom: 10px;
+}
+
+pre {
+	background-color: var(--vscode-input-background);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 3px;
+	padding: 15px;
+	overflow-x: auto;
+	font-family: 'Cascadia Code', Consolas, 'Courier New', monospace;
+}
+
+#commentText {
+	width: 100%;
+	background-color: var(--vscode-input-background);
+	color: var(--vscode-input-foreground);
+	border: 1px solid var(--vscode-inputControl-border);
+	border-radius: 3px;
+	padding: 10px;
+	margin: 15px 0;
+	resize: vertical;
+}
+
+.button-container {
+	display: flex;
+	gap: 10px;
+}
+
+button {
+	background-color: var(--vscode-button-background);
+	color: white;
+	border: none;
+	padding: 8px 15px;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+button:hover {
+	background-color: var(--vscode-button-hoverBackground);
+}
+
+button:focus {
+	outline: 2px solid var(--vscode-inputControl-border);
+	outline-offset: 2px;
+}
