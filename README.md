@@ -1,31 +1,61 @@
 const vscode = require('vscode');
 
-function getRelativePath() {
-    // 获取当前活动的编辑器
-    const editor = vscode.window.activeTextEditor;
-    if (!editor) {
-        vscode.window.showErrorMessage('没有打开任何文件');
-        return;
-    }
+class MyWebviewViewProvider {
+  constructor(context) {
+    this.context = context;
+  }
 
-    // 获取当前文件的完整路径
-    const filePath = editor.document.uri.fsPath;
+  resolveWebviewView(webviewView) {
+    // 配置 Webview
+    webviewView.webview.options = {
+      enableScripts: true, // 启用 JS
+    };
 
-    // 获取工作区的根目录
-    const workspaceFolder = vscode.workspace.getWorkspaceFolder(editor.document.uri);
-    if (!workspaceFolder) {
-        vscode.window.showErrorMessage('当前文件不在任何工作区中');
-        return;
-    }
+    // 设置 HTML 内容
+    webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
 
-    // 计算相对路径
-    const relativePath = vscode.workspace.asRelativePath(filePath, false);
+    // 如果需要处理消息
+    webviewView.webview.onDidReceiveMessage((message) => {
+      switch (message.command) {
+        case 'alert':
+          vscode.window.showInformationMessage(message.text);
+          break;
+      }
+    });
+  }
 
-    // 显示结果
-    vscode.window.showInformationMessage(`相对路径: ${relativePath}`);
-    return relativePath;
+  getHtmlForWebview(webview) {
+    return `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Webview in Sidebar</title>
+      </head>
+      <body>
+        <h1>Hello from the Sidebar!</h1>
+        <button onclick="sendMessage()">Click me</button>
+        <script>
+          const vscode = acquireVsCodeApi();
+          function sendMessage() {
+            vscode.postMessage({ command: 'alert', text: 'Hello from Webview!' });
+          }
+        </script>
+      </body>
+      </html>
+    `;
+  }
+}
+
+// 在扩展激活时注册 WebviewView
+function activate(context) {
+  const provider = new MyWebviewViewProvider(context);
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider('myWebviewView', provider)
+  );
 }
 
 module.exports = {
-    getRelativePath
+  activate,
 };
